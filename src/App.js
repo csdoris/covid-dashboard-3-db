@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component, Fragment } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { Route, Switch, withRouter } from 'react-router-dom';
+
+import { connect } from 'react-redux';
+import { fetchData } from './reducers/dataReducer/dataActions';
+
+import Header from './components/Header';
+import DataPage from './pages/DataPage/DataPage';
+import Dashboard from './pages/Dashboard/Dashboard';
+
+function mapStateToProps(state) {
+  return {
+    tooltip: state.data.tooltip,
+  }
 }
 
-export default App;
+class App extends Component {
+  componentDidMount() {
+    this.props.dispatch(fetchData());
+  }
+
+  render() {
+    return (
+      <Fragment>
+        <Header />
+        <Switch key={this.props.location.key}>
+          <Route exact path='/data' component={DataPage} />
+          <Route exact path='/' component={Dashboard} />
+        </Switch>
+      </Fragment>
+    );
+  }
+}
+
+export default withRouter(connect(mapStateToProps)(App));

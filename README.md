@@ -2,7 +2,7 @@ A Covid-19 dashboard built with React. Data is retrieved from https://pomber.git
 
 ## Live demo site
 
-https://doris-firebase-sandbox.web.app/
+https://covid-dashboard-db.web.app
 
 ### Acknowledgement
 My heartfelt appreciation goes to https://github.com/pomber/covid19 for providing the raw data to make this possible.
